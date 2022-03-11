@@ -36,7 +36,7 @@ public class Program
 	}
 }
 
-public class Model
+public class Model : IEquatable<Model>
 {
 	public string name { get; set; }
 	public int time { get; set; }
@@ -45,4 +45,21 @@ public class Model
 	{
 		return "Name: "+ name + ", Time: "+ time;
 	}
+	
+	public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            Model objAsList = obj as Model;
+            if (objAsList == null) return false;
+            else return Equals(objAsList);
+        }
+        public override int GetHashCode()
+        {
+            return time;
+        }
+        public bool Equals(Model other)
+        {
+            if (other == null) return false;
+            return (this.time.Equals(other.time));
+        }
 }
